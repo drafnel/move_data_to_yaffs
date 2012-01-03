@@ -70,11 +70,13 @@ for app in *; do
 	for d in $dirs_to_move; do
 		if [ ! -L "$app/$d" -a -d "$app/$d" ]; then
 			echo "Processing $app/$d..." &&
-			rm -rf "$yaffs/$app/$d" &&
+			if [ -d "$yaffs/$app/$d" ]; then
+				rm -r "$yaffs/$app/$d"
+			fi &&
 			tar -cf - "$app/$d" | tar -C "$yaffs" -xf - &&
-			rm -rf "$app/$d" &&
+			rm -r "$app/$d" &&
 			ln -s "$yaffs/$app/$d" "$app/$d" &&
-			chmod o-w "$yaffs/$app" ||
+			chmod 775 "$yaffs/$app" ||
 				echo 1>&2 "Error: failed moving $app/$d"
 		fi
 	done
