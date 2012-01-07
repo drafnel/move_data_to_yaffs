@@ -64,6 +64,11 @@ skip_apps='bn.ereader'
 datadata='/data/data'
 yaffs='/datadata'
 
+test -L "$datadata" && {
+	echo 1>&2 "Error: <$datadata> is a symbolic link, aborting"
+	exit 1
+}
+
 cd "$datadata" &&
 for app in *; do
 	echo " $skip_apps " | grep " $app " && continue
