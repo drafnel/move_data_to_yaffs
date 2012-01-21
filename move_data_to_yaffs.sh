@@ -87,7 +87,8 @@ test -L "$datadata" && {
 }
 
 cd "$datadata" &&
-for app in *; do
+{ test $# != 0 || set -- *; } &&
+for app in "$@"; do
 	echo " $skip_apps " | grep " $app " && continue
 	for d in $dirs_to_move; do
 		if [ ! -L "$app/$d" -a -d "$app/$d" ]; then
