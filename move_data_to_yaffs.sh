@@ -64,6 +64,23 @@ skip_apps='bn.ereader'
 datadata='/data/data'
 yaffs='/datadata'
 
+dryrun=
+
+# OPTIONS
+# -n    dryrun
+while case "$1" in -?) :;; *) false;; esac; do
+	case "$1" in
+	-n)
+		dryrun=1
+		;;
+	*)
+		echo 1>&2 "Error: unrecognized option $1"
+		exit 1
+		;;
+	esac
+	shift
+done
+
 test -L "$datadata" && {
 	echo 1>&2 "Error: <$datadata> is a symbolic link, aborting"
 	exit 1
@@ -75,6 +92,7 @@ for app in *; do
 	for d in $dirs_to_move; do
 		if [ ! -L "$app/$d" -a -d "$app/$d" ]; then
 			echo "Processing $app/$d..." &&
+			{ test "x$dryrun" = 'x' || continue; } &&
 			if [ -d "$yaffs/$app/$d" ]; then
 				rm -r "$yaffs/$app/$d"
 			fi &&
