@@ -86,6 +86,9 @@ test -L "$datadata" && {
 	exit 1
 }
 
+# process app directory
+# move app data to yaffs filesystem
+# create symbolic links to point to it
 cd "$datadata" &&
 { test $# != 0 || set -- *; } &&
 for app in "$@"; do
