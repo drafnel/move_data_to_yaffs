@@ -82,8 +82,16 @@ while case "$1" in -?) :;; *) false;; esac; do
 done
 
 test -L "$datadata" && {
-	echo 1>&2 "Error: <$datadata> is a symbolic link, aborting"
-	exit 1
+	echo "Inflating $datadata with contents of $yaffs..." &&
+	if test "x$dryrun" = 'x'; then
+		cp -a "$yaffs" "$datadata.new" &&
+		rm "$datadata" &&
+		mv "$datadata.new" "$datadata" &&
+		rm -r "$yaffs/"* || {
+			echo 1>&2 "Error: failed moving $yaffs to $datadata"
+			exit 1
+		}
+	fi
 }
 
 # process app directory
