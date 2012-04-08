@@ -108,3 +108,14 @@ for app in "$@"; do
 		fi
 	done
 done
+
+# remove uninstalled app data
+cd "$yaffs" &&
+for app in *; do
+	if [ -d "$app" -a ! -e "$datadata/$app" ]; then
+		echo "Removing stale app data for $app..." &&
+		{ test "x$dryrun" = 'x' || continue; } &&
+		rm -r "$app" ||
+			echo 1>&2 "Error: failed removing stale data for $app"
+	fi
+done
