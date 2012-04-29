@@ -2,13 +2,16 @@
 
 # move_data_to_yaffs.sh
 #
+# Copyright (c) 2012 "Brandon Casey" <drafnel@gmail.com>
+#
 # Move select subdirectories from the ext4 /data/data directory onto the
 # quicker yaffs /datadata directory and create symbolic links in their place.
 #
+# This script is designed for Cyanogenmod 7.X and 9.X on Samsung Galaxy S
+# (tested with Vibrant).
 #
-# This script is designed for Cyanogenmod 7.X on Samsung Galaxy S (tested
-# with Vibrant) for users who have moved their app data from /datadata back
-# to /data/data using a procedure like:
+# If /data/data is a symlink to /datadata, this script will break the
+# symlink and move the contents of /datadata to /data/data like this:
 #
 #    cp -a /datadata /data/data.new &&
 #    rm -f /data/data &&
