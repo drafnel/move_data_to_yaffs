@@ -3,7 +3,7 @@ SHELL_PATH ?= /bin/sh
 
 SHELL = $(SHELL_PATH)
 
-BINDIR_PROGRAMS = move_data_to_yaffs.sh
+BINDIR_PROGRAMS = move_data_to_yaffs.sh uninstall.sh
 
 test_bindir_programs := $(patsubst %,bin-wrappers/%,$(BINDIR_PROGRAMS))
 
