@@ -49,7 +49,7 @@
 # much larger 2GB ext4 partition.
 
 # Move these app subdirectories
-dirs_to_move='databases shared_prefs opera app_databases'
+dirs_to_move=${MDTY_DIRS_TO_MOVE:-'databases shared_prefs opera app_databases'}
 
 # Skip these apps
 # Barnes & Nobles keeps a few processes running in the background *all-the-time*
@@ -59,10 +59,10 @@ dirs_to_move='databases shared_prefs opera app_databases'
 # and then create the symbolic links by hand if you want.  Once you log in,
 # the new files will be created in /datadata and the app will work correctly.
 # The Amazon Kindle app and Google Books app do not have this problem.
-skip_apps='bn.ereader'
+skip_apps=${MDTY_SKIP_APPS:-'bn.ereader'}
 
-datadata='/data/data'
-yaffs='/datadata'
+datadata=${MDTY_DATADATA:-'/data/data'}
+yaffs=${MDTY_YAFFS:-'/datadata'}
 
 dryrun=
 
